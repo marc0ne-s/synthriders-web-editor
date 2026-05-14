@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthriders Design Lab: Synthwave Fusion Directions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=DM+Serif+Display&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Schibsted+Grotesk:wght@300;500;700&family=Space+Grotesk:wght@300;500;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #fdfcf8;
+            --text-main: #2d2a26;
+            --text-dim: #7a746d;
+        }
+        body {
+            background: #faf8f4;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #e5e0d8;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        h1 { font-size: 2.2rem; margin-bottom: 0.3rem; font-weight: 700; }
+        h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .subtitle { color: var(--text-dim); line-height: 1.6; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .preview-grid { display: grid; grid-template-columns: 1fr 260px; gap: 16px; border-radius: 8px; overflow: hidden; margin-top: 14px; }
+        .preview-main { padding: 18px; min-height: 240px; }
+        .preview-sidebar { padding: 16px; }
+
+        .mock-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .mock-logo { width: 26px; height: 26px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+        .mock-title { font-size: 13px; font-weight: 600; }
+        .mock-subtitle { font-size: 10px; }
+        .mock-timeline { height: 96px; border-radius: 4px; margin-top: 14px; position: relative; overflow: hidden; }
+        .mock-toolbar { display: flex; gap: 7px; margin-top: 10px; }
+        .mock-btn { padding: 5px 11px; border-radius: 5px; font-size: 10px; font-weight: 500; }
+        .mock-field { height: 20px; border-radius: 3px; margin-bottom: 7px; }
+        .tl-note { position: absolute; height: 24px; border-radius: 2px; opacity: 0.78; }
+        .tl-playhead { position: absolute; top: 0; bottom: 0; width: 1.5px; background: var(--ph); }
+
+        /* ═══════════════════════════════════════════════════════════════
+           DIRECTION 1: WARM NEON — paper ground, cyan/magenta accents
+           ═══════════════════════════════════════════════════════════ */
+        .dir-1 { --bg: #faf7f2; --card: #fefdfa; --text: #1a1815; --dim: #6b6560;
+            --cyan: #00e5ff; --magenta: #e040fb; --blue: #42a5f5; --red: #ef5350;
+            --border: #e0d8ce; --ph: #00e5ff;
+            font-family: 'Space Grotesk', sans-serif; }
+        .dir-1 .preview-grid {
+            background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
+            border: 1px solid #e0d8ce;
+            box-shadow: 0 0 30px rgba(0,229,255,0.04), inset 0 0 0 1px rgba(255,255,255,0.5); }
+        .dir-1 .preview-sidebar {
+            background: #f7f3ec;
+            border-left: 1px solid #e0d8ce; }
+        .dir-1 .mock-logo {
+            background: linear-gradient(135deg, #e040fb, #00e5ff);
+            color: #fff; box-shadow: 0 0 12px rgba(0,229,255,0.15); }
+        .dir-1 .mock-timeline {
+            background: linear-gradient(180deg, #f3efe8 0%, #f7f3ec 100%);
+            border: 1px solid #e0d8ce; }
+        .dir-1 .mock-timeline::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 63px, rgba(0,229,255,0.03) 63px, rgba(0,229,255,0.03) 64px);
+            pointer-events: none; }
+        .dir-1 .mock-btn {
+            background: #f5efe6; border: 1px solid #dcd5c8; color: #5a5040; }
+        .dir-1 .mock-btn.active {
+            background: linear-gradient(135deg, rgba(0,229,255,0.18), rgba(224,64,251,0.12));
+            border: 1px solid rgba(0,229,255,0.25); color: #008899; }
+        .dir-1 .mock-field {
+            background: #f3ede4; border: 1px solid #e0d8ce; }
+        .dir-1 .mock-field.accent {
+            background: linear-gradient(90deg, rgba(0,229,255,0.06), transparent);
+            border-color: rgba(0,229,255,0.12); }
+        .dir-1 .tl-note.r { background: linear-gradient(135deg, #42a5f5, #2196f3); box-shadow: 0 0 8px rgba(66,165,245,0.12); }
+        .dir-1 .tl-note.l { background: linear-gradient(135deg, #ef5350, #f44336); box-shadow: 0 0 8px rgba(239,83,80,0.10); }
+        .dir-1 .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.12); color: #008899; }
+
+        /* ═══════════════════════════════════════════════════════════════
+           DIRECTION 2: AGED SYNTHWAVE — warm dark leather + neon glow
+           ═══════════════════════════════════════════════════════════════ */
+        .dir-2 { --bg: #2a2420; --card: #312b26; --text: #e8e0d5; --dim: #a09585;
+            --cyan: #00e5ff; --magenta: #e040fb; --blue: #42a5f5; --red: #ef5350;
+            --border: #3d3630; --ph: #00e5ff;
+            font-family: 'Space Grotesk', sans-serif; }
+        .dir-2 .preview-grid {
+            background: radial-gradient(ellipse at 30% 20%, rgba(0,229,255,0.04) 0%, transparent 55%),
+                        radial-gradient(ellipse at 75% 60%, rgba(224,64,251,0.03) 0%, transparent 50%),
+                        #2f2925;
+            border: 1px solid #3d3630;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.015), 0 0 0 1px rgba(0,0,0,0.15); }
+        .dir-2 .preview-sidebar {
+            background: linear-gradient(180deg, #2f2925, #2a2420);
+            border-left: 1px solid #3d3630; }
+        .dir-2 .mock-logo {
+            background: linear-gradient(135deg, #e040fb, #00e5ff);
+            color: #1a1815; font-weight: 900;
+            box-shadow: 0 0 16px rgba(0,229,255,0.2), 0 0 4px rgba(224,64,251,0.15); }
+        .dir-2 .mock-timeline {
+            background: linear-gradient(180deg, #2a2420, #27221e);
+            border: 1px solid #3d3630; }
+        .dir-2 .mock-timeline::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 63px, rgba(0,229,255,0.025) 63px, rgba(0,229,255,0.025) 64px);
+            pointer-events: none; }
+        .dir-2 .mock-btn {
+            background: #36302a; border: 1px solid #4a4238; color: #b8a890; }
+        .dir-2 .mock-btn.active {
+            background: linear-gradient(135deg, rgba(0,229,255,0.25), rgba(224,64,251,0.15));
+            border: 1px solid rgba(0,229,255,0.3); color: #00e5ff;
+            text-shadow: 0 0 8px rgba(0,229,255,0.3); }
+        .dir-2 .mock-field {
+            background: #2d2722; border: 1px solid #3d3630; }
+        .dir-2 .mock-field.accent {
+            background: linear-gradient(90deg, rgba(0,229,255,0.05), transparent);
+            border-color: rgba(0,229,255,0.1); }
+        .dir-2 .tl-note.r { background: linear-gradient(135deg, #42a5f5, #2196f3); box-shadow: 0 0 10px rgba(66,165,245,0.2); }
+        .dir-2 .tl-note.l { background: linear-gradient(135deg, #ef5350, #f44336); box-shadow: 0 0 10px rgba(239,83,80,0.18); }
+        .dir-2 .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.15); color: #00e5ff; text-shadow: 0 0 6px rgba(0,229,255,0.2); }
+
+        /* ═══════════════════════════════════════════════════════════════
+           DIRECTION 3: WASHI NEON — Japanese paper + restrained glow
+           ═══════════════════════════════════════════════════════════════ */
+        .dir-3 { --bg: #f6f2ed; --card: #faf7f4; --text: #2d2824; --dim: #8a8278;
+            --cyan: #00b8d4; --magenta: #c94fd6; --blue: #3598dc; --red: #e04f4f;
+            --border: #e5ded5; --ph: #00b8d4;
+            font-family: 'Schibsted Grotesk', sans-serif; }
+        .dir-3 .preview-grid {
+            background: repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(180,165,145,0.018) 8px, rgba(180,165,145,0.018) 9px),
+                        #faf7f3;
+            border: 1px solid #e5ded5;
+            box-shadow: 0 0 0 1px rgba(180,160,140,0.04); }
+        .dir-3 .preview-sidebar {
+            background: linear-gradient(180deg, rgba(200,180,160,0.03), rgba(180,160,140,0.015));
+            border-left: 1px solid #e5ded5; }
+        .dir-3 .mock-logo {
+            background: linear-gradient(135deg, #c94fd6, #00b8d4);
+            color: #fff; border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0,184,212,0.1); }
+        .dir-3 .mock-timeline {
+            background: repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(180,165,145,0.015) 5px, rgba(180,165,145,0.015) 6px),
+                        #f7f3ef;
+            border: 1px solid #e5ded5; }
+        .dir-3 .mock-btn {
+            background: rgba(200,180,155,0.05); border: 1px solid #e5ded5; color: #6d6458;
+            font-weight: 300; letter-spacing: 0.02em; border-radius: 2px; }
+        .dir-3 .mock-btn.active {
+            background: linear-gradient(135deg, rgba(0,184,212,0.12), rgba(201,79,214,0.06));
+            border: 1px solid rgba(0,184,212,0.18); color: #007788; font-weight: 500; }
+        .dir-3 .mock-field {
+            background: linear-gradient(90deg, rgba(200,180,160,0.03), transparent);
+            border: 1px solid #e5ded5; }
+        .dir-3 .mock-field.accent {
+            background: linear-gradient(90deg, rgba(0,184,212,0.04), transparent);
+            border-color: rgba(0,184,212,0.08); }
+        .dir-3 .tl-note.r { background: linear-gradient(135deg, #3598dc, #2980b9); box-shadow: 0 0 6px rgba(53,152,220,0.08); }
+        .dir-3 .tl-note.l { background: linear-gradient(135deg, #e04f4f, #c0392b); box-shadow: 0 0 6px rgba(224,79,79,0.07); }
+        .dir-3 .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; font-size: 9px; font-weight: 500; background: rgba(0,184,212,0.05); border: 1px solid rgba(0,184,212,0.1); color: #007788; letter-spacing: 0.03em; }
+    </style>
+</head>
+<body>
+
+    <h1>Synthwave Fusion — Bridging Warm + Recognisable</h1>
+    <p class="subtitle">Each direction keeps cyan/magenta neon accent, blue/red note colours, and beat grid rhythm — grounded in warm materials, not cold glassmorphism. Mappers will recognise their game.</p>
+
+    <!-- Direction 1: Warm Neon ───────────────────────────────────── -->
+    <div class="card dir-1">
+        <h2>1. Warm Neon — Paper Ground + Synthwave Accents</h2>
+        <p class="subtitle">Cream paper base with the cyan↔magenta gradient players know. Beat grid as subtle cyan rules on warm paper. Notes keep their iconic blue/red glow but sit on tactile ground. Feels like a synthwave gig poster printed on nice stock. Bright enough to feel like Synth Riders, warm enough to feel human.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Summer_Vibe.synth</div>
+                        <div class="mock-subtitle" style="opacity:0.45;">128 BPM · Expert · 2:34 <span class="tag">◈ SR</span></div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="tl-note r" style="left:10%;top:14px;width:16px;"></div>
+                    <div class="tl-note l" style="left:18%;top:58px;width:14px;"></div>
+                    <div class="tl-note r" style="left:24%;top:14px;width:18px;"></div>
+                    <div class="tl-note l" style="left:33%;top:58px;width:15px;"></div>
+                    <div class="tl-note r" style="left:40%;top:24px;width:14px;"></div>
+                    <div class="tl-note r" style="left:52%;top:14px;width:17px;"></div>
+                    <div class="tl-note l" style="left:64%;top:58px;width:16px;"></div>
+                    <div class="tl-note r" style="left:78%;top:24px;width:15px;"></div>
+                    <div class="tl-playhead" style="left:42%;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select V</div>
+                    <div class="mock-btn">Draw B</div>
+                    <div class="mock-btn">Erase E</div>
+                    <div class="mock-btn" style="border-color:rgba(0,229,255,0.12);color:#008899;">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-size:10px;font-weight:600;margin-bottom:10px;opacity:0.4;text-transform:uppercase;letter-spacing:0.04em;">Inspector</div>
+                <div class="mock-field" style="width:80%;"></div>
+                <div class="mock-field accent" style="width:100%;"></div>
+                <div class="mock-field" style="width:65%;"></div>
+                <div class="mock-field accent" style="width:85%;"></div>
+                <div class="mock-field" style="width:50%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction 2: Aged Synthwave ──────────────────────────────── -->
+    <div class="card dir-2">
+        <h2>2. Aged Synthwave — Warm Dark Leather + Neon</h2>
+        <p class="subtitle" style="color:#a09585;">The recognisable dark aesthetic but WARM — not #080c14 glassmorphism cold. Espresso and amber ground with the familiar cyan/magenta neon glow. Beat ticks as subtle cyan rules. Notes glow with the iconic blue/red. Feels like a well-loved arcade cabinet — players will feel at home immediately, but with warmth instead of sterility.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Nocturne.synth</div>
+                        <div class="mock-subtitle" style="color:#a09585;">140 BPM · Master · 4:05 <span class="tag">◈ MASTER</span></div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="tl-note r" style="left:8%;top:16px;width:18px;"></div>
+                    <div class="tl-note l" style="left:15%;top:56px;width:14px;"></div>
+                    <div class="tl-note r" style="left:22%;top:16px;width:20px;"></div>
+                    <div class="tl-note l" style="left:30%;top:56px;width:16px;"></div>
+                    <div class="tl-note r" style="left:38%;top:26px;width:15px;"></div>
+                    <div class="tl-note r" style="left:48%;top:16px;width:18px;"></div>
+                    <div class="tl-note l" style="left:58%;top:56px;width:17px;"></div>
+                    <div class="tl-note r" style="left:70%;top:26px;width:14px;"></div>
+                    <div class="tl-playhead" style="left:35%;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select V</div>
+                    <div class="mock-btn">Draw B</div>
+                    <div class="mock-btn">Erase E</div>
+                    <div class="mock-btn" style="border-color:rgba(0,229,255,0.2);color:#00e5ff;">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-size:10px;font-weight:600;margin-bottom:10px;opacity:0.35;text-transform:uppercase;letter-spacing:0.05em;color:#a09585;">Inspector</div>
+                <div class="mock-field" style="width:80%;"></div>
+                <div class="mock-field accent" style="width:100%;"></div>
+                <div class="mock-field" style="width:60%;"></div>
+                <div class="mock-field accent" style="width:75%;"></div>
+                <div class="mock-field" style="width:45%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction 3: Washi Neon ──────────────────────────────────── -->
+    <div class="card dir-3">
+        <h2>3. Washi Neon — Japanese Paper + Muted Synthwave</h2>
+        <p class="subtitle">Quiet, restrained, but unmistakably Synth Riders. Subtle washi texture with the cyan/magenta gradient where it matters — logo, active states, playhead. Notes keep their blue/red identity but at lower saturation so they sit peacefully on the paper. Feels like a Muji product designed by someone who loves synthwave. Hardcore mappers get their familiar rhythm language — just delivered more quietly.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Forest_Echo.synth</div>
+                        <div class="mock-subtitle" style="opacity:0.4;">120 BPM · Normal · 2:48 <span class="tag">NORMAL</span></div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="tl-note r" style="left:12%;top:14px;width:18px;"></div>
+                    <div class="tl-note l" style="left:20%;top:54px;width:14px;"></div>
+                    <div class="tl-note r" style="left:28%;top:14px;width:17px;"></div>
+                    <div class="tl-note r" style="left:38%;top:24px;width:16px;"></div>
+                    <div class="tl-note l" style="left:48%;top:54px;width:15px;"></div>
+                    <div class="tl-playhead" style="left:27%;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn" style="border-color:rgba(0,184,212,0.12);color:#007788;">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-size:9px;font-weight:300;letter-spacing:0.08em;margin-bottom:10px;opacity:0.3;">INSPECTOR</div>
+                <div class="mock-field" style="width:75%;"></div>
+                <div class="mock-field accent" style="width:100%;"></div>
+                <div class="mock-field" style="width:55%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid #e5e0d8;margin:32px 0;">
+
+    <h2>What stays recognisably Synth Riders across all three</h2>
+    <ul style="color:#6b6560;line-height:1.8;font-size:0.95rem;">
+        <li>Cyan ↔ magenta gradient on the logo ◈ — the iconic SR colour pair</li>
+        <li>Blue notes (right hand) and red notes (left hand) — unchanged from game</li>
+        <li>Beat grid as spaced vertical rules — mapper muscle memory preserved</li>
+        <li>Cyan playhead line — the #00e5ff cursor players know</li>
+        <li>Difficulty tags with synthwave vibe — Expert/Master energy intact</li>
+        <li>Same lane layout (R/L/OB/RAIL) — zero relearning</li>
+    </ul>
+
+    <div class="card" style="background:#fefdfa;">
+        <h2>Which one, Marcus?</h2>
+        <p class="subtitle">1 = light + bright neon, 2 = warm-dark arcade, 3 = quiet washi restraint. All three keep the SR visual language. Pick one and DesignBot applies it to the actual CSS tokens immediately.</p>
+    </div>
+
+</body>
+</html>

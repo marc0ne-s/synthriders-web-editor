@@ -8,9 +8,13 @@ export interface EditorState {
   playhead: number
   isPlaying: boolean
   snapGrid: 'off' | '1/4' | '1/8' | '1/16'
-  activeTool: 'select' | 'draw' | 'eraser'
+  activeTool: 'select' | 'draw' | 'eraser' | 'rail'
   show3D: boolean
   showWaveform: boolean
+  /** Rail currently being drawn (before final placement) */
+  placingRail: { startTime: number; hand: 'left' | 'right' } | null
+  /** Selected rail ID for inspector + timeline highlight */
+  selectedRailId: string | null
 }
 
 interface EditorStore extends EditorState {
@@ -24,6 +28,9 @@ interface EditorStore extends EditorState {
   setTool: (t: EditorState['activeTool']) => void
   toggle3D: () => void
   toggleWaveform: () => void
+  startPlacingRail: (startTime: number, hand: 'left' | 'right') => void
+  cancelPlacingRail: () => void
+  selectRail: (id: string | null) => void
 }
 
 export const useEditor = create<EditorStore>()(
@@ -37,6 +44,8 @@ export const useEditor = create<EditorStore>()(
     activeTool: 'select',
     show3D: true,
     showWaveform: true,
+    placingRail: null,
+    selectedRailId: null,
 
     setScreen: (s) => set({ activeScreen: s }),
     setZoom: (z) => set(() => ({ timelineZoom: Math.max(0.1, Math.min(10, z)) })),
@@ -53,5 +62,8 @@ export const useEditor = create<EditorStore>()(
     setTool: (t) => set({ activeTool: t }),
     toggle3D: () => set((state) => ({ show3D: !state.show3D })),
     toggleWaveform: () => set((state) => ({ showWaveform: !state.showWaveform })),
+    startPlacingRail: (startTime, hand) => set({ placingRail: { startTime, hand } }),
+    cancelPlacingRail: () => set({ placingRail: null }),
+    selectRail: (id) => set({ selectedRailId: id }),
   }))
 )

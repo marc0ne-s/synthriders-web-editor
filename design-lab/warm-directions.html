@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthriders Design Lab: Warm & Organic Directions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #fdfcf8;
+            --bg-card: #ffffff;
+            --text-main: #2d2a26;
+            --text-dim: #7a746d;
+            --accent-primary: #d4a373;
+            --accent-secondary: #ccd5ae;
+            --border-color: #e5e0d8;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .direction-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f9f7f2;
+        }
+
+        .preview-main {
+            padding: 20px;
+            min-height: 300px;
+        }
+
+        .preview-sidebar {
+            border-left: 1px solid var(--border-color);
+            padding: 20px;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .timeline-mock {
+            height: 120px;
+            background: #eeebe3;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .note-block {
+            height: 40px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+        p { color: var(--text-dim); line-height: 1.6; }
+
+        /* Direction 1: Paper & Ink (Minimalist, High Contrast, Serif) */
+        .dir-1 {
+            --bg-base: #fcfaf7;
+            --bg-card: #ffffff;
+            --text-main: #1a1a1a;
+            --text-dim: #555555;
+            --accent-primary: #2c3e50;
+            --border-color: #e0e0e0;
+            font-family: 'EB Garamond', serif;
+        }
+        .dir-1 .preview-container { border: 1px solid #ddd; }
+        .dir-1 .note-block { background: #f0f0f0; border: 1px solid #ccc; }
+
+        /* Direction 2: Sun-Drenched Linen (Warm, Soft, Textural) */
+        .dir-2 {
+            --bg-base: #f4f1ea;
+            --bg-card: #ffffff;
+            --text-main: #4a3f35;
+            --text-dim: #8b7e74;
+            --accent-primary: #d4a373;
+            --border-color: #e8e2d9;
+            font-family: 'Playfair Display', serif;
+        }
+        .dir-2 .preview-container { border: 1px solid #dcd7cf; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .dir-2 .note-block { background: #faedcd; border-radius: 12px; }
+
+        /* Direction 3: Botanical/Earth (Organic, Muted Greens, Natural) */
+        .dir-3 {
+            --bg-base: #f0f4f0;
+            --bg-card: #ffffff;
+            --text-main: #2d3a2d;
+            --text-dim: #6b7a6b;
+            --accent-primary: #7a947a;
+            --border-color: #d1dbd1;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .dir-3 .preview-container { border: 1px solid #c5d1c5; }
+        .dir-3 .note-block { background: #e2ece2; border-radius: 20px; }
+
+    </style>
+</head>
+<body>
+
+    <h1>Design Lab: Warm & Organic</h1>
+    <p>Moving away from "tech-bro" dark modes towards tactile, human-centric aesthetics.</p>
+
+    <!-- Direction 1 -->
+    <div class="direction-card dir-1">
+        <h2>1. Paper & Ink (The Archivist)</h2>
+        <p>High-contrast, minimalist, editorial. Uses serif typography and clean lines to feel like a premium physical journal or blueprint.</p>
+        <div class="preview-container">
+            <div class="preview-main">
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">Project: Summer_Vibe.synth</div>
+                <div class="timeline-mock">
+                    <div style="position: absolute; left: 30%; top: 0; bottom: 0; width: 2px; background: black; opacity: 0.3;"></div>
+                    <div style="position: absolute; left: 10%; top: 20px; width: 60px; height: 30px; background: #333; opacity: 0.2; border-radius: 2px;"></div>
+                    <div style="position: absolute; left: 45%; top: 50px; width: 80px; height: 30px; background: #333; opacity: 0.2; border-radius: 2px;"></div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-weight: bold; margin-bottom: 10px;">Inspector</div>
+                <div class="note-block" style="width: 100%; height: 20px; background: #eee;"></div>
+                <div class="note-block" style="width: 80%; height: 20px; background: #eee;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction 2 -->
+    <div class="direction-card dir-2">
+        <h2>2. Sun-Drenched Linen (The Tactile)</h2>
+        <p>Warm, soft, and inviting. Uses cream tones, soft shadows, and rounded corners to mimic natural materials like linen and paper.</p>
+        <div class="preview-container">
+            <div class="preview-main">
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">Project: Golden_Hour.synth</div>
+                <div class="timeline-mock" style="background: #fdf5e6;">
+                    <div style="position: absolute; left: 20%; top: 10px; width: 100px; height: 40px; background: #d4a373; opacity: 0.4; border-radius: 20px;"></div>
+                    <div style="position: absolute; left: 50%; top: 40px; width: 120px; height: 40px; background: #ccd5ae; opacity: 0.4; border-radius: 20px;"></div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-weight: bold; margin-bottom: 10px;">Inspector</div>
+                <div class="note-block" style="width: 100%; height: 30px; background: #faedcd;"></div>
+                <div class="note-block" style="width: 70%; height: 30px; background: #faedcd;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction 3 -->
+    <div class="direction-card dir-3">
+        <h2>3. Botanical/Earth (The Naturalist)</h2>
+        <p>Muted greens, organic shapes, and earthy tones. Feels like a modern garden or a natural landscape. Calm and grounded.</p>
+        <div class="preview-container">
+            <div class="preview-main">
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">Project: Forest_Echo.synth</div>
+                <div class="timeline-mock" style="background: #e8f0e8;">
+                    <div style="position: absolute; left: 15%; top: 15px; width: 40px; height: 40px; background: #7a947a; opacity: 0.3; border-radius: 50%;"></div>
+                    <div style="position: absolute; left: 60%; top: 30px; width: 50px; height: 50px; background: #7a947a; opacity: 0.3; border-radius: 50%;"></div>
+                </div>
+            </div>
+            <div class="preview-sidebar">
+                <div style="font-weight: bold; margin-bottom: 10px;">Inspector</div>
+                <div class="note-block" style="width: 100%; height: 35px; background: #d1dbd1;"></div>
+                <div class="note-block" style="width: 60%; height: 35px; background: #d1dbd1;"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

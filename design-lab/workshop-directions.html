@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthriders Design Lab: Workshop — New Directions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Serif+Display&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Newsreader:ital,opsz,wght@0,16..72,300;0,16..72,500;1,16..72,300&family=Schibsted+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #fdfcf8;
+            --bg-card: #ffffff;
+            --text-main: #2d2a26;
+            --text-dim: #7a746d;
+            --accent-primary: #d4a373;
+            --accent-secondary: #ccd5ae;
+            --border-color: #e5e0d8;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .direction-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 1rem; }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        .preview-main { padding: 20px; min-height: 260px; }
+        .preview-sidebar { border-left: 1px solid var(--border-color); padding: 20px; }
+
+        .mock-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .mock-logo { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .mock-title { font-size: 13px; font-weight: 600; }
+        .mock-subtitle { font-size: 11px; opacity: 0.5; }
+
+        .mock-timeline { height: 100px; border-radius: 4px; margin-top: 16px; position: relative; overflow: hidden; }
+        .mock-toolbar { display: flex; gap: 8px; margin-top: 12px; }
+        .mock-btn { padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 500; }
+
+        .mock-field { height: 22px; border-radius: 4px; margin-bottom: 8px; }
+
+        /* ── Direction A: Warm Xerox — misregistered photocopy aesthetic ── */
+        .dir-a {
+            --bg-base: #faf7f2;
+            --bg-card: #fefdfa;
+            --text-main: #1a1815;
+            --text-dim: #6b6560;
+            --accent: #c8553d;
+            --border: #ddd6cc;
+            font-family: 'Newsreader', serif;
+        }
+        .dir-a .preview-grid {
+            background: #f9f6f0;
+            border: 1px solid #d9d2c7;
+            box-shadow:
+                3px 3px 0px rgba(180,120,80,0.08),
+                -1px -1px 0px rgba(200,160,120,0.04);
+        }
+        .dir-a .preview-sidebar {
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 4px,
+                rgba(180,150,120,0.03) 4px,
+                rgba(180,150,120,0.03) 5px
+            );
+            border-left: 1px solid #d9d2c7;
+        }
+        .dir-a .mock-logo {
+            background: #c8553d;
+            color: #fff;
+            transform: rotate(-0.5deg);
+            box-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+        .dir-a .mock-title { transform: rotate(-0.15deg); }
+        .dir-a .mock-timeline {
+            background: linear-gradient(
+                135deg,
+                #f3ede4 0%,
+                #f8f4ed 30%,
+                #f0ebe2 60%,
+                #f5f1e8 100%
+            );
+            border: 1px solid #d9d2c7;
+            transform: rotate(-0.08deg);
+        }
+        .dir-a .mock-btn {
+            background: #f5ede2;
+            border: 1px solid #d9cfc0;
+            color: #5a4530;
+            transform: rotate(-0.2deg);
+        }
+        .dir-a .mock-btn.active {
+            background: #c8553d;
+            color: #fff;
+            border-color: #b04530;
+            transform: rotate(0.3deg);
+        }
+        .dir-a .mock-field {
+            background: #f3ede4;
+            border: 1px solid #e0d7ca;
+            transform: rotate(-0.1deg);
+        }
+        .dir-a .timeline-note {
+            position: absolute;
+            height: 28px;
+            background: #c8553d;
+            opacity: 0.75;
+            border-radius: 2px;
+            transform: rotate(-0.3deg);
+            box-shadow: 1px 1px 0px rgba(180,80,50,0.15);
+        }
+
+        /* ── Direction B: Watercolour Wash — soft diffused colour bleeding ── */
+        .dir-b {
+            --bg-base: #fbf9f5;
+            --bg-card: #fefdfb;
+            --text-main: #3a3530;
+            --text-dim: #8a8075;
+            --accent: #7b9ea8;
+            --border: #e8e2d6;
+            font-family: 'Crimson Text', serif;
+        }
+        .dir-b .preview-grid {
+            background:
+                radial-gradient(ellipse at 25% 15%, rgba(180,200,210,0.12) 0%, transparent 65%),
+                radial-gradient(ellipse at 75% 80%, rgba(210,185,155,0.10) 0%, transparent 60%),
+                radial-gradient(ellipse at 60% 40%, rgba(175,190,170,0.07) 0%, transparent 50%),
+                #fcfaf7;
+            border: 1px solid #e5ded2;
+        }
+        .dir-b .preview-sidebar {
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(160,190,200,0.08) 0%, transparent 70%),
+                #fdfbf7;
+            border-left: 1px solid #e5ded2;
+        }
+        .dir-b .mock-logo {
+            background:
+                radial-gradient(circle at 60% 35%, rgba(255,255,255,0.4) 0%, transparent 60%),
+                linear-gradient(135deg, #8fafb8 0%, #7b9ea8 50%, #6d8f99 100%);
+            color: #fff;
+            border-radius: 50%;
+        }
+        .dir-b .mock-timeline {
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(170,195,200,0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 60%, rgba(200,180,160,0.10) 0%, transparent 50%),
+                #f5f2ec;
+            border: 1px solid #e5ded2;
+            border-radius: 8px;
+        }
+        .dir-b .mock-btn {
+            background:
+                linear-gradient(135deg, rgba(140,175,185,0.08), rgba(180,160,145,0.05));
+            border: 1px solid #e0d9cc;
+            border-radius: 20px;
+            color: #5a6d73;
+        }
+        .dir-b .mock-btn.active {
+            background:
+                radial-gradient(circle at 60% 40%, rgba(255,255,255,0.3) 0%, transparent 60%),
+                linear-gradient(135deg, #8fafb8, #6d8f99);
+            color: #fff;
+            border-color: #6d8f99;
+        }
+        .dir-b .mock-field {
+            background:
+                linear-gradient(90deg, rgba(160,185,195,0.06), rgba(190,170,155,0.04));
+            border: 1px solid #e5ded2;
+            border-radius: 10px;
+        }
+        .dir-b .timeline-note {
+            position: absolute;
+            height: 26px;
+            background:
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.25) 0%, transparent 60%),
+                linear-gradient(135deg, #8fafb8, #6d8f99);
+            opacity: 0.8;
+            border-radius: 12px;
+        }
+
+        /* ── Direction C: Worn Leather Journal — rich, dark warm with burnished edges ── */
+        .dir-c {
+            --bg-base: #2a2420;
+            --bg-card: #312b26;
+            --text-main: #e8e0d5;
+            --text-dim: #a09585;
+            --accent: #c89460;
+            --border: #3d3630;
+            font-family: 'DM Serif Display', serif;
+        }
+        .dir-c .preview-grid {
+            background:
+                radial-gradient(ellipse at 20% 10%, rgba(200,150,100,0.06) 0%, transparent 50%),
+                #2f2925;
+            border: 1px solid #3d3630;
+            box-shadow:
+                inset 0 1px 0px rgba(255,255,255,0.02),
+                0 0 0 1px rgba(0,0,0,0.2);
+        }
+        .dir-c .preview-sidebar {
+            background:
+                linear-gradient(180deg, #2f2925 0%, #2a2420 100%);
+            border-left: 1px solid #3d3630;
+        }
+        .dir-c .mock-logo {
+            background:
+                linear-gradient(135deg, #c89460, #a07040);
+            color: #2a2420;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .dir-c .mock-title { color: #e8dcc8; }
+        .dir-c .mock-timeline {
+            background:
+                linear-gradient(180deg, #2a2420 0%, #27221e 100%);
+            border: 1px solid #3d3630;
+            border-radius: 3px;
+        }
+        .dir-c .mock-btn {
+            background: #36302a;
+            border: 1px solid #4a4238;
+            color: #b8a890;
+        }
+        .dir-c .mock-btn.active {
+            background:
+                linear-gradient(135deg, #c89460, #a07040);
+            color: #2a2420;
+            border-color: #c89460;
+            font-weight: 700;
+        }
+        .dir-c .mock-field {
+            background: #2d2722;
+            border: 1px solid #3d3630;
+            border-radius: 2px;
+        }
+        .dir-c .timeline-note {
+            position: absolute;
+            height: 30px;
+            background:
+                linear-gradient(180deg, #c89460 0%, #a07040 100%);
+            opacity: 0.85;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* ── Direction D: Japanese Washi Paper — delicate, translucent layers ── */
+        .dir-d {
+            --bg-base: #f6f2ed;
+            --bg-card: #faf7f4;
+            --text-main: #2d2824;
+            --text-dim: #8a8278;
+            --accent: #b8956a;
+            --border: #e5ded5;
+            font-family: 'Schibsted Grotesk', sans-serif;
+        }
+        .dir-d .preview-grid {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(180,165,145,0.025) 8px,
+                    rgba(180,165,145,0.025) 9px
+                ),
+                #faf7f3;
+            border: 1px solid #e5ded5;
+            box-shadow:
+                0 0 0 1px rgba(180,160,140,0.05),
+                0 0 0 2px rgba(180,160,140,0.03);
+        }
+        .dir-d .preview-sidebar {
+            background:
+                linear-gradient(180deg, rgba(200,180,160,0.04), rgba(180,160,140,0.02));
+            border-left: 1px solid #e5ded5;
+        }
+        .dir-d .mock-logo {
+            background:
+                linear-gradient(135deg, #c4a882, #b8956a);
+            color: #fff;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .dir-d .mock-timeline {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 6px,
+                    rgba(180,165,145,0.02) 6px,
+                    rgba(180,165,145,0.02) 7px
+                ),
+                #f7f3ef;
+            border: 1px solid #e5ded5;
+        }
+        .dir-d .mock-btn {
+            background: rgba(200,180,155,0.06);
+            border: 1px solid #e5ded5;
+            color: #6d6458;
+            border-radius: 2px;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        .dir-d .mock-btn.active {
+            background: #b8956a;
+            color: #fff;
+            border-color: #a08058;
+        }
+        .dir-d .mock-field {
+            background:
+                linear-gradient(90deg, rgba(200,180,160,0.04), transparent);
+            border: 1px solid #e5ded5;
+            border-radius: 2px;
+        }
+        .dir-d .timeline-note {
+            position: absolute;
+            height: 30px;
+            background:
+                linear-gradient(135deg, #c4a882, #a08058);
+            opacity: 0.7;
+            border-radius: 2px;
+        }
+
+        /* ── Direction E: Oil Paint & Canvas — thick impasto texture ── */
+        .dir-e {
+            --bg-base: #f8f5f0;
+            --bg-card: #fefdfb;
+            --text-main: #2d2824;
+            --text-dim: #7d746b;
+            --accent: #5b7b6a;
+            --border: #d8d0c4;
+            font-family: 'Crimson Text', serif;
+        }
+        .dir-e .preview-grid {
+            background:
+                radial-gradient(ellipse at 15% 25%, rgba(120,160,140,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(190,160,130,0.05) 0%, transparent 50%),
+                #fcfaf6;
+            border: 1px solid #d8d0c4;
+        }
+        .dir-e .preview-sidebar {
+            background:
+                radial-gradient(ellipse at 60% 50%, rgba(140,170,150,0.05) 0%, transparent 65%),
+                #fcfaf7;
+            border-left: 1px solid #d8d0c4;
+        }
+        .dir-e .mock-logo {
+            background:
+                linear-gradient(135deg, #7a9a85, #5b7b6a);
+            color: #fff;
+            border-radius: 4px;
+            box-shadow: 2px 3px 0px rgba(90,120,100,0.12);
+        }
+        .dir-e .mock-title { letter-spacing: -0.01em; }
+        .dir-e .mock-timeline {
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(160,140,120,0.015) 3px,
+                    rgba(160,140,120,0.015) 4px
+                ),
+                #f5f2ec;
+            border: 1px solid #d8d0c4;
+            border-radius: 3px;
+        }
+        .dir-e .mock-btn {
+            background:
+                linear-gradient(135deg, rgba(140,160,145,0.06), rgba(180,155,140,0.04));
+            border: 1px solid #d8d0c4;
+            border-radius: 3px;
+            color: #5a6058;
+            font-weight: 400;
+        }
+        .dir-e .mock-btn.active {
+            background:
+                linear-gradient(135deg, #7a9a85, #5b7b6a);
+            color: #fff;
+            border-color: #5b7b6a;
+            box-shadow: 2px 2px 0px rgba(90,120,100,0.15);
+        }
+        .dir-e .mock-field {
+            background: rgba(160,150,135,0.04);
+            border: 1px solid #d8d0c4;
+            border-radius: 3px;
+        }
+        .dir-e .timeline-note {
+            position: absolute;
+            height: 28px;
+            background:
+                linear-gradient(135deg, #7a9a85, #5b7b6a);
+            opacity: 0.75;
+            border-radius: 3px;
+            box-shadow: 1px 2px 0px rgba(90,120,100,0.15);
+        }
+
+        /* ── Direction F: Vintage Map — cartographic, aged parchment, compass marks ── */
+        .dir-f {
+            --bg-base: #ebe3d3;
+            --bg-card: #f2ece0;
+            --text-main: #3a3228;
+            --text-dim: #7a6e5d;
+            --accent: #8b4513;
+            --border: #d5c9b5;
+            font-family: 'EB Garamond', serif;
+        }
+        .dir-f .preview-grid {
+            background:
+                radial-gradient(circle at 50% 50%, rgba(160,130,90,0.04) 0%, transparent 70%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 12px,
+                    rgba(140,110,70,0.02) 12px,
+                    rgba(140,110,70,0.02) 13px
+                ),
+                #ede5d8;
+            border: 1px solid #d5c9b5;
+            border-radius: 0;
+            box-shadow: inset 0 0 40px rgba(140,110,80,0.04);
+        }
+        .dir-f .preview-sidebar {
+            background:
+                linear-gradient(180deg, #ede5d8, #ebe3d3);
+            border-left: 1px solid #d5c9b5;
+            background-image:
+                radial-gradient(circle at 20px 40px, rgba(140,100,60,0.04) 0px, transparent 8px),
+                radial-gradient(circle at 20px 80px, rgba(140,100,60,0.04) 0px, transparent 8px);
+        }
+        .dir-f .mock-logo {
+            background:
+                linear-gradient(135deg, #a0522d, #8b4513);
+            color: #ebe3d3;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .dir-f .mock-title {
+            font-variant: small-caps;
+            letter-spacing: 0.03em;
+        }
+        .dir-f .mock-timeline {
+            background:
+                radial-gradient(circle at 10% 50%, rgba(160,120,70,0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 50%, rgba(160,120,70,0.03) 0%, transparent 40%),
+                #e8dfd0;
+            border: 1px solid #d5c9b5;
+            border-radius: 0;
+        }
+        .dir-f .mock-timeline::before {
+            content: '+';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 10px;
+            color: rgba(140,100,60,0.25);
+        }
+        .dir-f .mock-btn {
+            background: #e8dfd0;
+            border: 1px solid #d5c9b5;
+            color: #5a4830;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .dir-f .mock-btn.active {
+            background: #8b4513;
+            color: #ebe3d3;
+            border-color: #6b3510;
+        }
+        .dir-f .mock-field {
+            background:
+                linear-gradient(90deg, #e8dfd0, #ebe3d3);
+            border: 1px solid #d5c9b5;
+        }
+        .dir-f .timeline-note {
+            position: absolute;
+            height: 26px;
+            background: #a0522d;
+            opacity: 0.7;
+            border-radius: 1px;
+            box-shadow: 1px 1px 0px rgba(100,60,30,0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Design Lab Workshop — New Directions</h1>
+    <p>Building on the first round (Paper & Ink, Sun-Drenched Linen, Botanical). These push further into texture, materiality, and mood.</p>
+
+    <!-- Direction A: Warm Xerox -->
+    <div class="direction-card dir-a">
+        <h2>A. Warm Xerox — Misregistered Photocopy</h2>
+        <p>Slightly askew. Slightly burned. Feels like a zine, a memo from a warm copier, or an underground art publication. Tiny rotations on every element. Warm rust-red accent like toner on cream paper.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Summer_Vibe.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif;">128 BPM · Expert · 2:34</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 12%; top: 18px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 18%; top: 52px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 25%; top: 18px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 32%; top: 52px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 38%; top: 28px; width: 14px;"></div>
+                    <div class="timeline-note" style="left: 45%; top: 18px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 55%; top: 52px; width: 24px;"></div>
+                    <div class="timeline-note" style="left: 65%; top: 28px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 72%; top: 18px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 82%; top: 52px; width: 18px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 11px; font-weight: 600; margin-bottom: 12px; opacity: 0.5; transform: rotate(-0.2deg);">INSPECTOR</div>
+                <div class="mock-field" style="width: 85%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 70%;"></div>
+                <div class="mock-field" style="width: 90%;"></div>
+                <div class="mock-field" style="width: 60%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction B: Watercolour Wash -->
+    <div class="direction-card dir-b">
+        <h2>B. Watercolour Wash — Soft Diffused Bleeding</h2>
+        <p>Colours bleed into each other like wet watercolour on cold-press paper. Muted teal-grey accents. Soft radial washes give depth without hard edges. Feels calm, meditative, painterly.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Golden_Hour.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif; color: #8a8075;">128 BPM · Hard · 3:12</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 10%; top: 20px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 18%; top: 56px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 26%; top: 20px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 35%; top: 56px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 42%; top: 30px; width: 24px;"></div>
+                    <div class="timeline-note" style="left: 50%; top: 20px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 60%; top: 56px; width: 22px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 11px; font-weight: 600; margin-bottom: 12px; opacity: 0.4;">INSPECTOR</div>
+                <div class="mock-field" style="width: 80%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 65%;"></div>
+                <div class="mock-field" style="width: 90%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction C: Worn Leather Journal -->
+    <div class="direction-card dir-c">
+        <h2>C. Worn Leather Journal — Burnished & Warm-Dark</h2>
+        <p>Not cold dark — warm dark. Like a well-used leather journal, brass corners, library lamp glow. Rich amber accent on deep espresso tones. Burnished edges, subtle gold warmth. Serious but inviting.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Nocturne.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif; color: #a09585;">140 BPM · Master · 4:05</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 8%; top: 18px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 16%; top: 52px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 24%; top: 18px; width: 24px;"></div>
+                    <div class="timeline-note" style="left: 33%; top: 52px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 40%; top: 28px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 52%; top: 18px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 64%; top: 52px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 78%; top: 28px; width: 18px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 11px; font-weight: 600; margin-bottom: 12px; opacity: 0.4; color: #a09585;">INSPECTOR</div>
+                <div class="mock-field" style="width: 85%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 70%;"></div>
+                <div class="mock-field" style="width: 90%;"></div>
+                <div class="mock-field" style="width: 55%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction D: Japanese Washi Paper -->
+    <div class="direction-card dir-d">
+        <h2>D. Japanese Washi Paper — Delicate & Translucent</h2>
+        <p>Quiet, considered, restrained. Subtle vertical fibre lines like handmade washi. Warm beige-gold accents. Clean sans-serif typography with wide tracking. Feels like a Muji notebook — nothing extraneous.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Forest_Echo.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif; color: #8a8278;">120 BPM · Normal · 2:48</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 14%; top: 16px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 22%; top: 50px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 30%; top: 16px; width: 24px;"></div>
+                    <div class="timeline-note" style="left: 38%; top: 50px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 48%; top: 26px; width: 20px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 10px; font-weight: 300; letter-spacing: 0.08em; margin-bottom: 14px; opacity: 0.35; color: #8a8278;">INSPECTOR</div>
+                <div class="mock-field" style="width: 80%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 65%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction E: Oil Paint & Canvas -->
+    <div class="direction-card dir-e">
+        <h2>E. Oil Paint & Canvas — Impasto Texture</h2>
+        <p>Thick pigment, visible brush strokes, canvas grain. Sage green accents on warm cream ground. Elements feel physically applied — drop shadows cast like paint ridges, not CSS box-shadows. Earthy and substantial.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title">Prairie_Sun.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif; color: #7d746b;">135 BPM · Expert · 3:44</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 10%; top: 22px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 18%; top: 56px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 26%; top: 22px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 35%; top: 56px; width: 26px;"></div>
+                    <div class="timeline-note" style="left: 44%; top: 30px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 52%; top: 22px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 62%; top: 56px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 72%; top: 30px; width: 20px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn">Snap 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 11px; font-weight: 600; margin-bottom: 12px; opacity: 0.4;">INSPECTOR</div>
+                <div class="mock-field" style="width: 80%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 60%;"></div>
+                <div class="mock-field" style="width: 85%;"></div>
+                <div class="mock-field" style="width: 50%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direction F: Vintage Map -->
+    <div class="direction-card dir-f">
+        <h2>F. Vintage Map — Cartographic & Aged Parchment</h2>
+        <p>Compass points, latitude lines, sepia washes. Feels like a 18th-century nautical chart or explorer's field notes. Small caps, thin rules, coordinate markers. Sienna-brown accents on aged parchment. Adventurous but studious.</p>
+        <div class="preview-grid">
+            <div class="preview-main">
+                <div class="mock-header">
+                    <div class="mock-logo">◈</div>
+                    <div>
+                        <div class="mock-title" style="font-family: 'EB Garamond', serif;">TERRA_NOVA.synth</div>
+                        <div class="mock-subtitle" style="font-family: 'Inter', sans-serif; color: #7a6e5d;">128 BPM · Expert · 3:56</div>
+                    </div>
+                </div>
+                <div class="mock-timeline">
+                    <div class="timeline-note" style="left: 12%; top: 18px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 20%; top: 50px; width: 22px;"></div>
+                    <div class="timeline-note" style="left: 28%; top: 18px; width: 16px;"></div>
+                    <div class="timeline-note" style="left: 38%; top: 50px; width: 20px;"></div>
+                    <div class="timeline-note" style="left: 45%; top: 26px; width: 24px;"></div>
+                    <div class="timeline-note" style="left: 55%; top: 18px; width: 18px;"></div>
+                    <div class="timeline-note" style="left: 66%; top: 50px; width: 20px;"></div>
+                </div>
+                <div class="mock-toolbar">
+                    <div class="mock-btn active">Select</div>
+                    <div class="mock-btn">Draw</div>
+                    <div class="mock-btn">Erase</div>
+                    <div class="mock-btn" style="font-size: 9px;">SNAP 1/8</div>
+                </div>
+            </div>
+            <div class="preview-sidebar" style="font-family: 'Inter', sans-serif;">
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 12px; opacity: 0.35; text-transform: uppercase;">Inspector</div>
+                <div class="mock-field" style="width: 85%;"></div>
+                <div class="mock-field" style="width: 100%;"></div>
+                <div class="mock-field" style="width: 60%;"></div>
+                <div class="mock-field" style="width: 75%;"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
